@@ -12,6 +12,7 @@ function PaymentForm() {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +37,7 @@ function PaymentForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentElement />
+      <PaymentElement onReady={() => setIsReady(true)} />
       {errorMessage && (
         <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">
           {errorMessage}
@@ -44,10 +45,10 @@ function PaymentForm() {
       )}
       <button
         type="submit"
-        disabled={!stripe || isProcessing}
+        disabled={!stripe || !isReady || isProcessing}
         className="mt-6 w-full rounded-full bg-indigo-600 py-3 text-sm font-semibold text-white shadow-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isProcessing ? 'Processing…' : 'Pay $29.00'}
+        {isProcessing ? 'Processing…' : !isReady ? 'Loading payment form…' : 'Pay $29.00'}
       </button>
     </form>
   );
