@@ -7,6 +7,7 @@ const plans = [
     features: ['Up to 3 projects', '1 GB storage', 'Community support', 'Basic analytics'],
     cta: 'Get Started Free',
     highlighted: false,
+    href: '#',
   },
   {
     name: 'Pro',
@@ -14,8 +15,9 @@ const plans = [
     period: '/month',
     description: 'For growing teams that need more power.',
     features: ['Unlimited projects', '50 GB storage', 'Priority support', 'Advanced analytics', 'Custom integrations', 'Team collaboration'],
-    cta: 'Start Free Trial',
+    cta: 'Buy Now — $29',
     highlighted: true,
+    href: '/checkout',
   },
   {
     name: 'Enterprise',
@@ -25,6 +27,7 @@ const plans = [
     features: ['Everything in Pro', '500 GB storage', 'Dedicated account manager', 'SSO & SAML', 'Custom SLA', 'Audit logs'],
     cta: 'Contact Sales',
     highlighted: false,
+    href: '#',
   },
 ];
 
@@ -84,7 +87,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <a
-                href="#"
+                href={plan.href}
                 className={`mt-8 block rounded-full py-3 text-center text-sm font-semibold transition ${
                   plan.highlighted
                     ? 'bg-white text-indigo-600 hover:bg-indigo-50'
